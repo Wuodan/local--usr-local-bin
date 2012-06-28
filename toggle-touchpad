@@ -9,7 +9,6 @@ if [ ! -x /usr/bin/xinput ]; then
 	echo "Error: /usr/bin/xinput not found"
 	exit 1
 fi
-[ -x /usr/bin/xinput ] || exit 1
 
 getTouchDeviceId()
 {
