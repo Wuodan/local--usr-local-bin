@@ -6,7 +6,7 @@
 
 # sanity check
 if [ ! -x /usr/bin/cpufreq-info ]  || [ ! -x /usr/bin/cpufreq-set ]; then
-	echo "/usr/bin/cpufreq-info or /usr/bin/cpufreq-set not found"
+	echo "Error: /usr/bin/cpufreq-info or /usr/bin/cpufreq-set not found"
 	echo "Do you have sys-power/cpufreqd installed?"
 	exit 1
 fi
@@ -31,8 +31,8 @@ setNextGovernor()
 		newGov=$(echo "$allGovernors" | sed -r 's/^([[:alnum:]]+)[[:space:]]+.*$/\1/')
 	fi
 	cpufreq-set -r -g $newGov
-	echo "Old governor was \"$currentGov\", new is \"$newGov\"."
 	echo "Available governors: \"$allGovernors\""
+	echo "$currentGov -> $newGov"
 	exit 0
 }
 

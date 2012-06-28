@@ -1,6 +1,15 @@
 #!/bin/sh
+# Author: Stefan Kuhn <woudan@hispeed.ch>
 #
-[ -f /usr/bin/xinput ] || exit 0
+# toggles touchpads on/off
+# Supported are both Synaptics and Elantech touchpads
+
+# sanity check
+if [ ! -x /usr/bin/xinput ]; then
+	echo "Error: /usr/bin/xinput not found"
+	exit 1
+fi
+[ -x /usr/bin/xinput ] || exit 1
 
 getTouchDeviceId()
 {
