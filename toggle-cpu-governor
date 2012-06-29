@@ -30,10 +30,16 @@ setNextGovernor()
 	if [ "$newGov" == '' ]; then
 		newGov=$(echo "$allGovernors" | sed -r 's/^([[:alnum:]]+)[[:space:]]+.*$/\1/')
 	fi
-	cpufreq-set -r -g $newGov
 	echo "Available governors: \"$allGovernors\""
-	echo "$currentGov -> $newGov"
-	exit 0
+	echo "Old governor: \"$currentGov\""
+	# set new governor
+	cpufreq-set -r -g $newGov
+	if [ $? -eq 0 ]; then
+		echo "New governor: $newGov"
+		exit 0
+	else
+		echo "CPU governor not set ... are you root?"
+	fi
 }
 
 setNextGovernor
